@@ -97,9 +97,9 @@ h2 {
 .activeTaskName{
   width: 800px;
 }
-.activeTaskInput {
+/* .activeTaskInput {
   margin-right: 500px;
-}
+} */
 .madeTaskName{
   width: 800px;
 }
