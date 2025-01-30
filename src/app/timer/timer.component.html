@@ -1,0 +1,20 @@
+<app-header></app-header>
+<div class="timer-container">
+  <h2>Таймер</h2>
+  <input type="number" [(ngModel)]="timerDuration" placeholder="Введите время в секундах" />
+  <button (click)="startTimer()">Старт</button>
+  <button (click)="stopTimer()">Стоп</button>
+  <div *ngIf="isTimerRunning">
+    Осталось: {{ timerRemaining }} секунд
+  </div>
+</div>
+
+<div class="timer-container">
+  <h2>Секундомер</h2>
+  <button (click)="startStopwatch()">Старт</button>
+  <button (click)="pauseStopwatch()">Пауза</button>
+  <button (click)="stopStopwatch()">Стоп</button>
+  <div>
+    Время: {{ stopwatchTime }} секунд
+  </div>
+</div>

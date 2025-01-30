@@ -1,0 +1,17 @@
+<app-header></app-header>
+<div class="converter-container">
+  <h2>Конвертер рублей в иностранные валюты</h2>
+  <div class="input-group">
+    <label for="rubAmount">Сумма в рублях:</label>
+    <input type="number" id="rubAmount" [(ngModel)]="rubAmount" (input)="convert()" placeholder="Введите сумму">
+  </div>
+
+  <div class="results" *ngIf="convertedValues">
+    <h3>Результаты конвертации:</h3>
+    <ul>
+      <li *ngFor="let currency of currencyList">
+        {{ currency }}: {{ convertedValues[currency] | number:'1.2-2' }}
+      </li>
+    </ul>
+  </div>
+</div>

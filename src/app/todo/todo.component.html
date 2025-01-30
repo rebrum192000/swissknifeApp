@@ -1,0 +1,36 @@
+<app-header></app-header>
+<div class="todo-container">
+  <h1>Список задач</h1>
+  <input [(ngModel)]="newTask" (ngModelChange)="setNewTask($event)" placeholder="Введите новую задачу" class="addTask"/>
+  <button (click)="addOrUpdateTask()">Добавить задачу</button>
+
+  <h2>Активные задачи</h2>
+<ul>
+  <li *ngFor="let task of tasks; let i = index">
+    <span class='activeTaskName' *ngIf="editIndex !== i">{{ task }}</span>
+      <input class="activeTaskInput" *ngIf="editIndex === i" [(ngModel)]="newTask" />
+      <div class="controlButtons">
+        <button *ngIf="editIndex === i" (click)="addOrUpdateTask()">Ок</button>
+        <button *ngIf="editIndex === i" (click)="cancelEdit()">Отменить</button>
+        <button *ngIf="editIndex !== i" (click)="setEditTask(i)">Редактировать</button>
+        <button (click)="markAsCompleted(i)">Выполнено</button>
+        <button (click)="removeTask(i)">Удалить</button>
+    </div>
+  </li>
+</ul>
+
+  <h2>Выполненные задачи</h2>
+  <ul class="completed-tasks">
+    <li *ngFor="let completedTask of completedTasks; let i = index">
+      <span class="madeTaskName" *ngIf="editCompletedIndex !== i">{{ completedTask }}</span>
+      <input *ngIf="editCompletedIndex === i" [(ngModel)]="newTask" (ngModelChange)="setNewTask($event)" />
+      <div class="controlButtons">
+        <button *ngIf="editCompletedIndex === i" (click)="updateCompletedTask()">Ок</button>
+        <button *ngIf="editCompletedIndex === i" (click)="editCompletedIndex = null; newTask = ''">Отменить</button>
+        <button *ngIf="editCompletedIndex !== i" (click)="setEditCompletedTask(i)">Редактировать</button>
+        <button (click)="removeCompletedTask(i)">Удалить</button>
+        <button (click)="unmarkAsCompleted(i)">Вернуть</button>
+      </div>
+    </li>
+  </ul>
+</div>

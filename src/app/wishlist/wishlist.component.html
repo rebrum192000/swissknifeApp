@@ -1,0 +1,35 @@
+<app-header></app-header>
+<div class="wishlist-container">
+  <h2>Мой wishlist</h2>
+  <input type="text" [(ngModel)]="newItem" placeholder="Название элемента" />
+  <input type="number" [(ngModel)]="newPrice" placeholder="Цена" />
+  <input type="text" [(ngModel)]="newUrl" placeholder="Ссылка" />
+  <input type="file" (change)="onFileChange($event)" />
+  <button (click)="addItem()">Добавить</button>
+
+  <div>
+    <button (click)="sortItems('asc')">Сортировать по возрастанию цены</button>
+    <button (click)="sortItems('desc')">Сортировать по убыванию цены</button>
+  </div>
+
+  <ul>
+    <li *ngFor="let item of items; let i = index">
+      <ng-container *ngIf="!item.isEditing; else editTemplate">
+        <span>{{ item.name }}</span>
+        <span>{{ item.price | currency: 'RUB':'':'1.0-0'}} руб</span>
+        <span><a [href]="item.url" target="_blank">Ссылка</a></span>
+        <img [src]="item.image" alt="{{ item.name }}" style="width: 100px; height: auto;" />
+        <button (click)="editItem(i)">Редактировать</button>
+        <button (click)="removeItem(i)">Удалить</button>
+      </ng-container>
+      <ng-template #editTemplate>
+        <span><input [(ngModel)]="itemEdit[i].name" /></span>
+        <span><input [(ngModel)]="itemEdit[i].price" type="number" /></span>
+        <span><input [(ngModel)]="itemEdit[i].url" /></span>
+        <span><input type="file" (change)="onFileChange($event)" /></span>
+        <button (click)="saveItem(i)">Ок</button>
+        <button (click)="cancelEdit(i)">Отмена</button>
+      </ng-template>
+    </li>
+  </ul>
+</div>

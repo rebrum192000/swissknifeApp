@@ -1,0 +1,70 @@
+<app-header></app-header>
+<div class="container">
+  <h1>Калькулятор калорий</h1>
+  <div class="foodArea">
+    <div>
+        <h2>Выбор дня</h2>
+        <input type="date" [(ngModel)]="selectedDate" (change)="selectDate(selectedDate)" />
+    </div>
+
+    <div>
+        <h2>Добавить прием пищи</h2>
+        <input type="text" [(ngModel)]="newFoodName" placeholder="Название еды" />
+        <input type="number" [(ngModel)]="newFoodCalories" placeholder="Калории" />
+
+        <select [(ngModel)]="newMealType">
+            <option value="breakfast">Завтрак</option>
+            <option value="lunch">Обед</option>
+            <option value="dinner">Ужин</option>
+        </select>
+
+        <button (click)="addFoodItem()">Добавить</button>
+    </div>
+
+    <h2>Приемы пищи за {{ selectedDate }}</h2>
+  <div *ngIf="foodItemsByDate[selectedDate] && foodItemsByDate[selectedDate].breakfast.length">
+    <h3>Завтраки</h3>
+    <ul>
+      <li *ngFor="let item of foodItemsByDate[selectedDate].breakfast">{{ item.name }}: {{ item.calories }} калорий</li>
+    </ul>
+  </div>
+
+  <div *ngIf="foodItemsByDate[selectedDate] && foodItemsByDate[selectedDate].lunch.length">
+      <h3>Обеды</h3>
+      <ul>
+          <li *ngFor="let item of foodItemsByDate[selectedDate].lunch">{{ item.name }}: {{ item.calories }} калорий</li>
+      </ul>
+  </div>
+
+  <div *ngIf="foodItemsByDate[selectedDate] && foodItemsByDate[selectedDate].dinner.length">
+      <h3>Ужины</h3>
+      <ul>
+          <li *ngFor="let item of foodItemsByDate[selectedDate].dinner">{{ item.name }}: {{ item.calories }} калорий</li>
+      </ul>
+  </div>
+  <h3>Общее количество калорий: {{ getTotalCalories() }}</h3>
+</div>
+
+  <div class="trainArea">
+    <div>
+        <h2>Добавить тренировку</h2>
+        <input type="text" [(ngModel)]="newWorkoutType" placeholder="Тип тренировки" />
+        <input type="number" [(ngModel)]="newCaloriesBurned" placeholder="Сожженные калории" />
+
+        <button (click)="addWorkout()">Добавить тренировку</button>
+    </div>
+
+    <h3>Тренировки за {{ selectedDate }}</h3>
+    <div *ngIf="workoutsByDate[selectedDate] && workoutsByDate[selectedDate].length > 0">
+      <ul>
+        <li *ngFor="let workout of workoutsByDate[selectedDate]">
+          {{ workout.type }}: {{ workout.caloriesBurned }} калорий
+        </li>
+      </ul>
+    </div>
+
+    <h3>Общее количество сожженных калорий: {{ getTotalCaloriesBurned() }}</h3>
+    <h3>Дефицит калорий: {{ getCaloricDeficit() }}</h3>
+  </div>
+</div>
+

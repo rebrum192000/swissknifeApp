@@ -1,0 +1,31 @@
+.converter-container {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  margin-right: 10px;
+}
+
+.input-group input {
+  width: 200px;
+  padding: 5px;
+}
+
+.results ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.results li {
+  margin: 5px 0;
+}
+h2{
+  margin-bottom: 20px;
+}

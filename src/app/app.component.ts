@@ -1,12 +1,16 @@
 import { Component } from '@angular/core';
+import { TodoComponent } from './todo/todo.component';
+import { WishlistComponent } from "./wishlist/wishlist.component";
+import { CalorieCalculatorComponent } from "./calorie-calculator/calorie-calculator.component";
+import { TimerComponent } from "./timer/timer.component";
 import { RouterOutlet } from '@angular/router';
+import { ConverterComponent } from './currency/currency.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  standalone: true,
+  imports: [TodoComponent, WishlistComponent, CalorieCalculatorComponent, TimerComponent, RouterOutlet, ConverterComponent, HttpClientModule],
 })
-export class AppComponent {
-  title = 'todo-list';
-}
+export class AppComponent {}
